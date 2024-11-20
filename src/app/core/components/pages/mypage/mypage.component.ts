@@ -62,9 +62,10 @@ export class MypageComponent implements OnInit {
   confirmDelete(){
     this.deleteProductDialog = false;
     this.productService.deleteProduct(this.product.id).subscribe((data)=>{
+      this.getProducts();
       this.messageService.add({severity:'success',summary:'Product Deleted',detail:'Product '+this.product.nombre+' deleted successfully'});
     });
-    this.getProducts();
+
   }
 
   hideDialog(){
