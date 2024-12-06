@@ -3,5 +3,17 @@ export interface Product {
   nombre: string;
   imagen: string;
   precio: number;
-  marca:  string;
+  estado: string;
+  categoria: string;
+}
+
+
+export interface Category {
+  id:     string;
+  nombre: string;
+}
+
+export interface Estado {
+  id:     string;
+  nombre: string;
 }

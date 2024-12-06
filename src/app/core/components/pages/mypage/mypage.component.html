@@ -20,8 +20,9 @@
                       <th pSortableColumn="code">Nombre <p-sortIcon field="code"></p-sortIcon></th>
                       <th pSortableColumn="name">Imagen<p-sortIcon field="name"></p-sortIcon></th>
                       <th pSortableColumn="price">Precio <p-sortIcon field="price"></p-sortIcon></th>
-                      <th pSortableColumn="category">Marca <p-sortIcon field="category"></p-sortIcon></th>
+                      <th pSortableColumn="category">Categoria <p-sortIcon field="category"></p-sortIcon></th>
                       <th pSortableColumn="acciones">Acciones <p-sortIcon field="acciones"></p-sortIcon></th>
+                      <th pSortableColumn="acciones">Estado <p-sortIcon field="acciones"></p-sortIcon></th>
                   </tr>
               </ng-template>
               <ng-template pTemplate="body" let-product>
@@ -39,8 +40,12 @@
                       </td>
                       <td style="width:14%; min-width:10rem;">
                           <span class="p-column-title">Category</span>
-                          {{product.marca}}
+                          {{ getCategoryName(product.categoria) }}
                       </td>
+                      <td style="width:14%; min-width:10rem;">
+                        <span [class]="'product-badge status-'+product.estado" >  {{ getStatusLabel(product.estado) }}</span>
+
+                    </td>
                       <td>
                           <div class="flex">
                               <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editProduct(product)"></button>
@@ -53,39 +58,77 @@
       </div>
 
       <p-dialog [(visible)]="productDialog" [style]="{width: '450px'}" header="Product Details" [modal]="true" class="p-fluid">
-          <ng-template pTemplate="content">
 
+        <form [formGroup]="form">
               <div class="field">
                   <label for="name">Nombre</label>
-                  <input type="text" pInputText id="name" [(ngModel)]="product.nombre" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !product.nombre}"/>
-                  <small class="ng-dirty ng-invalid" *ngIf="submitted && !product.nombre">Name is required.</small>
+                  <input type="text" pInputText id="name" formControlName="nombre"  autofocus [ngClass]="{'ng-dirty':isInvalid('nombre')}"/>
+                  <small *ngIf="isRequire('nombre','required')" class="input-invalid">nombre is required.</small>
               </div>
 
               <div class="field">
                 <label for="name">Imagen</label>
-                <input type="text" pInputText id="name" [(ngModel)]="product.imagen" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !product.nombre}"/>
-                <small class="ng-dirty ng-invalid" *ngIf="submitted && !product.imagen">Name is required.</small>
+                <input type="text" pInputText id="name" formControlName="imagen" [ngClass]="{'ng-dirty':isInvalid('imagen')}"/>
+                <small *ngIf="isRequire('imagen','required')" class="input-invalid">imagen is required.</small>
             </div>
 
 
               <div class="formgrid grid">
                   <div class="field col">
                       <label for="price">Precio</label>
-                      <p-inputNumber id="price" [(ngModel)]="product.precio" mode="currency" currency="USD" locale="en-US"></p-inputNumber>
+                      <p-inputNumber id="price" formControlName="precio" mode="currency" currency="USD" locale="en-US" [ngClass]="{'ng-dirty':isInvalid('precio')}"></p-inputNumber>
+                      <small *ngIf="isRequire('precio','required')" class="input-invalid">precio is required.</small>
                   </div>
               </div>
 
               <div class="field">
-                <label for="name">Marca</label>
-                <input type="text" pInputText id="name" [(ngModel)]="product.marca" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !product.nombre}"/>
-                <small class="ng-dirty ng-invalid" *ngIf="submitted && !product.marca">Name is required.</small>
-            </div>
-          </ng-template>
+                <label for="status">Estados</label>
+                <p-dropdown
+                  formControlName="estado"
+                  inputId="inventoryStatus"
+                  optionLabel="label"
+                  optionValue="value"
+                  [options]="statuses"
+                  placeholder="Select">
 
-          <ng-template pTemplate="footer">
+                  <ng-template pTemplate="selectedItem" let-selected>
+                    <span *ngIf="selected" [class]="'product-badge status-' + selected.value">
+                      {{ selected.label }}
+                    </span>
+                    <span *ngIf="!selected">Seleccione un estado</span>
+                  </ng-template>
+
+
+                  <ng-template let-option pTemplate="item">
+                    <span [class]="'product-badge status-' + option.value">
+                      {{ option.label }}
+                    </span>
+                  </ng-template>
+                </p-dropdown>
+              </div>
+
+
+
+              <div class="field">
+                <label class="mb-3">Categorias</label>
+                <div class="formgrid grid">
+                  <div class="field-radiobutton col-6" *ngFor="let category of categories">
+                    <p-radioButton
+                      [id]="category.id"
+                      formControlName="categoria"
+                      [value]="category.id"
+                      name="categoria"
+                    ></p-radioButton>
+                    <label [for]="category.id">{{ category.nombre }}</label>
+                  </div>
+                </div>
+              </div>
+
+          <div class="flex">
               <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
               <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveProduct()"></button>
-          </ng-template>
+          </div>
+        </form>
       </p-dialog>
 
 
@@ -93,7 +136,7 @@
       <p-dialog [(visible)]="deleteProductDialog" header="Confirm" [modal]="true" [style]="{width:'450px'}">
           <div class="flex align-items-center justify-content-center">
               <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
-              <span *ngIf="product">Are you sure you want to delete <b>{{product.nombre}}</b>?</span>
+              <span >Are you sure you want to delete <b>{{form.get('nombre')?.value}}</b>?</span>
           </div>
           <ng-template pTemplate="footer">
               <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No" (click)="deleteProductDialog = false"></button>

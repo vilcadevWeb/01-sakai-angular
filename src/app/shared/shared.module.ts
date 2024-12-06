@@ -1,7 +1,7 @@
 // shared.module.ts
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // PrimeNG modules
 import { ButtonModule } from 'primeng/button';
@@ -35,7 +35,8 @@ import { DialogModule } from 'primeng/dialog';
     ToolbarModule,
     RatingModule,
     InputTextareaModule,
-    DialogModule
+    DialogModule,
+    ReactiveFormsModule
   ],
   exports: [
     CommonModule,
@@ -52,7 +53,8 @@ import { DialogModule } from 'primeng/dialog';
     ToolbarModule,
     RatingModule,
     InputTextareaModule,
-    DialogModule
+    DialogModule,
+    ReactiveFormsModule
   ]
 })
 export class SharedModule {}

@@ -5,70 +5,22 @@
       "nombre": "Teclado Mecánico RGB",
       "imagen": "https://cdn-icons-png.flaticon.com/512/11766/11766441.png",
       "precio": 69.99,
-      "marca": "Hyper"
+      "estado": "lowstock",
+      "categoria": "1"
+    }
+  ],
+  "categories": [
+    {
+      "id": "1",
+      "nombre": "Monitores"
     },
     {
       "id": "2",
-      "nombre": "Mouse Gamer Inalámbrico",
-      "imagen": "https://cdn-icons-png.flaticon.com/512/11766/11766441.png",
-      "precio": 59.99,
-      "marca": "Logitech"
+      "nombre": "Teclados"
     },
     {
       "id": "3",
-      "nombre": "Monitor 24'' Full HD",
-      "imagen": "https://cdn-icons-png.flaticon.com/512/11766/11766441.png",
-      "precio": 149.99,
-      "marca": "Acer"
-    },
-    {
-      "id": "4",
-      "nombre": "Teclado Ergonómico Bluetooth",
-      "imagen": "https://cdn-icons-png.flaticon.com/512/11766/11766441.png",
-      "precio": 89.99,
-      "marca": "Microsoft"
-    },
-    {
-      "id": "5",
-      "nombre": "Mouse Óptico USB",
-      "imagen": "https://cdn-icons-png.flaticon.com/512/11766/11766441.png",
-      "precio": 15.99,
-      "marca": "HP"
-    },
-    {
-      "id": "6",
-      "nombre": "Monitor 27'' 4K UHD",
-      "imagen": "https://cdn-icons-png.flaticon.com/512/11766/11766441.png",
-      "precio": 329.99,
-      "marca": "Samsung"
-    },
-    {
-      "id": "7",
-      "nombre": "Teclado Mecánico Compacto",
-      "imagen": "https://cdn-icons-png.flaticon.com/512/11766/11766441.png",
-      "precio": 109.99,
-      "marca": "Razer"
-    },
-    {
-      "id": "8",
-      "nombre": "Mouse para Diseño Ergonómico",
-      "imagen": "https://cdn-icons-png.flaticon.com/512/11766/11766441.png",
-      "precio": 69.99,
-      "marca": "Logitech"
-    },
-    {
-      "id": "9",
-      "nombre": "Monitor Curvo 32'' QHD",
-      "imagen": "https://cdn-icons-png.flaticon.com/512/11766/11766441.png",
-      "precio": 399.99,
-      "marca": "LG"
-    },
-    {
-      "id": "10",
-      "nombre": "Teclado RGB para Juegos",
-      "imagen": "https://cdn-icons-png.flaticon.com/512/11766/11766441.png",
-      "precio": 54.99,
-      "marca": "Corsair"
+      "nombre": "Ratones"
     }
   ]
 }
